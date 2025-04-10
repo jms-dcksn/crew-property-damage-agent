@@ -1,0 +1,49 @@
+---
+preprocess_image_task:
+  description: Download and preprocess the image from {image_url} to ensure optimal
+    quality for subsequent analysis. Perform noise reduction and normalization techniques.
+  expected_output: A preprocessed image ready for damage analysis.
+  async_execution: false
+  agent: image_preprocessing
+analyze_damage_task:
+  description: Analyze the preprocessed image output from preprocess_image_task to
+    detect areas of property damage. Produce a detailed text description of the damage
+    including types and extent.
+  expected_output: A detailed damage description with annotations on damage type and
+    extent.
+  async_execution: false
+  agent: damage_analysis
+  context:
+  - preprocess_image_task
+estimate_cost_task:
+  description: Using the detailed damage description from analyze_damage_task, estimate
+    the repair/replacement costs based on judgement-driven rules and reference data from web searches.
+  expected_output: An estimated cost value for repairing or replacing the damaged
+    property.
+  async_execution: false
+  agent: cost_estimation
+  context:
+  - analyze_damage_task
+generate_metadata_task:
+  description: Generate additional metadata such as confidence levels of the analysis,
+    severity rating, and follow-up recommendations. Use results from analyze_damage_task
+    and estimate_cost_task along with {inspection_date} for context.
+  expected_output: Metadata details including analysis confidence, severity score,
+    and suggested follow-up actions.
+  async_execution: false
+  agent: metadata_generation
+  context:
+  - analyze_damage_task
+  - estimate_cost_task
+compile_report_task:
+  description: Combine the outputs from analyze_damage_task, estimate_cost_task, and
+    generate_metadata_task into a final, comprehensive report. The report should reference
+    the claim using {claim_id} and document overall findings.
+  expected_output: A cohesive report containing the damage description, estimated
+    repair/replacement costs, and all relevant metadata.
+  async_execution: false
+  agent: report_compilation
+  context:
+  - analyze_damage_task
+  - estimate_cost_task
+  - generate_metadata_task
