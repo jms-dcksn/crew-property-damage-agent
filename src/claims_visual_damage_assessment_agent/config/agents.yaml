@@ -9,16 +9,16 @@ image_preprocessing:
   llm: gpt-4o
 damage_analysis:
   role: Damage Analysis Specialist
-  goal: Analyze the preprocessed image and detect areas of property damage, including
+  goal: Analyze the preprocessed image and detect areas of automobile damage due to an accident, including
     damage type and extent.
-  backstory: With a background in computer vision and damage assessment, this specialist
+  backstory: With a background in computer vision and damage assessment of vehicles that have beenin accidents, this specialist
     applies judgement-based rules to extract detailed damage descriptions from images.
   llm: gpt-4o
 cost_estimation:
   role: Cost Estimation Specialist
   goal: Estimate the repair/replacement cost based on the damage description using
-    judgement-based rules and searching the web for similar repair estimates.
-  backstory: Leveraging expertise in property repair and market trends, this specialist
+    judgement-based rules with no external reference data.
+  backstory: Leveraging expertise in vehicle repair and market trends, this specialist
     assigns cost estimates based on severity and extent of the observed damage.
   llm: gpt-4o
 metadata_generation:

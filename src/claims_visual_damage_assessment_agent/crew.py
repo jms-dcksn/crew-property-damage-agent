@@ -3,15 +3,15 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import BraveSearchTool
 from pydantic import BaseModel
 
-brave_search_tool = BraveSearchTool()
+#brave_search_tool = BraveSearchTool()
 
-class DamageReport(BaseModel):
-    summary: str
-    damageType: str
-    severity: str
-    estimatedCost: str
-    recommendations: str
-    conclusion: str
+# class DamageReport(BaseModel):
+#     summary: str
+#     damageType: str
+#     severity: str
+#     estimatedCost: str
+#     recommendations: str
+#     conclusion: str
 
 @CrewBase
 class ClaimsVisualDamageAssessmentAgentCrew():
@@ -35,7 +35,6 @@ class ClaimsVisualDamageAssessmentAgentCrew():
     def cost_estimation(self) -> Agent:
         return Agent(
             config=self.agents_config['cost_estimation'],
-            tools=[brave_search_tool],
         )
 
     @agent
@@ -86,7 +85,6 @@ class ClaimsVisualDamageAssessmentAgentCrew():
         return Task(
             config=self.tasks_config['compile_report_task'],
             tools=[],
-            output_pydantic=DamageReport,
         )
 
 

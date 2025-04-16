@@ -7,7 +7,7 @@ preprocess_image_task:
   agent: image_preprocessing
 analyze_damage_task:
   description: Analyze the preprocessed image output from preprocess_image_task to
-    detect areas of property damage. Produce a detailed text description of the damage
+    detect areas of vehicle damage. Produce a detailed text description of the damage
     including types and extent.
   expected_output: A detailed damage description with annotations on damage type and
     extent.
@@ -17,9 +17,9 @@ analyze_damage_task:
   - preprocess_image_task
 estimate_cost_task:
   description: Using the detailed damage description from analyze_damage_task, estimate
-    the repair/replacement costs based on judgement-driven rules and reference data from web searches.
+    the repair/replacement costs based on judgement-driven rules.
   expected_output: An estimated cost value for repairing or replacing the damaged
-    property.
+    vehicle.
   async_execution: false
   agent: cost_estimation
   context:
